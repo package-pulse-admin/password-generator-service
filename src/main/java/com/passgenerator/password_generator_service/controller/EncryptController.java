@@ -22,6 +22,9 @@ public class EncryptController {
 
     @PostMapping("/{type}")
     public String encrypt(@PathVariable EncryptionType type, @RequestBody EncryptRequest encryptedData) throws Exception {
+        if (type.name().equals(EncryptionType.bcrypt.name())){
+            return PasswordEncryptor.hashPassword(encryptedData.password());
+        }
         return passwordService.getEncryptor(type).encrypt(encryptedData.password());
     }
 }
