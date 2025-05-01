@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/encrypt")
-@CrossOrigin(origins = "http://localhost:3000")
 public class EncryptController {
 
     private final PasswordService passwordService;
