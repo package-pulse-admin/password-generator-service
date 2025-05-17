@@ -2,6 +2,7 @@ package com.passgenerator.password_generator_service.controller;
 
 import com.passgenerator.password_generator_service.services.PasswordGenerator;
 import com.passgenerator.password_generator_service.services.PasswordService;
+import com.passgenerator.password_generator_service.services.PasswordStrength;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,14 @@ public class PasswordController {
     }
 
 
-    @PostMapping("/check")
+    @PostMapping("/check-auto")
     public ResponseEntity<String> checkPasswordStrength(@RequestParam String password) {
         String result = passwordService.evaluatePassword(password);
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/check")
+    public ResponseEntity<String> check(@RequestParam String password) {
+        return ResponseEntity.ok(PasswordStrength.assessStrength(password));
     }
 }
